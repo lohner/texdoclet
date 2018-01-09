@@ -14,6 +14,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{ifthen}
 
 % The following packages are not striclty necessary to get texdoclet working
 \usepackage{hyperref}
@@ -43,9 +44,11 @@
 % Environment for classes, interfaces
 % Argument 1: "class" or "interface"
 % Argument 2: the name of the class/interface
-\newenvironment{texdocclass}[2]{%
+\newenvironment{texdocclass}[4]{%
 	\gdef\classname{#2}
 	\section{\texttt{#1 \textbf{#2}}}
+	\ifthenelse{\equal{#3}{}}{}{\texttt{extends \textbf{#3}}}
+	\ifthenelse{\equal{#4}{}}{}{\texttt{implements \textbf{#4}}}
 }{\newpage{}}
 
 % Environment for class description

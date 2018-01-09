@@ -240,8 +240,32 @@ public class TexDoclet extends Doclet {
 			type = "class";
 		}
 
+		ClassDoc superclass = cd.superclass();
+
+		String superclassName;
+		if (superclass == null || superclass.qualifiedName().equals("java.lang.Object") || cd.isEnum()) {
+			superclassName = "";
+		} else if (superclass.containingPackage().equals(cd.containingPackage()) || superclass.containingPackage().name().equals("java.lang")) {
+			superclassName = superclass.name();
+		} else {
+			superclassName = superclass.qualifiedName();
+		}
+
+		String interfaces = "";
+		for (ClassDoc i : cd.interfaces()) {
+			if (i.containingPackage().equals(cd.containingPackage()) || i.containingPackage().name().equals("java.lang")) {
+				interfaces += i.name();
+			} else {
+				interfaces += i.qualifiedName();
+			}
+			interfaces += ", ";
+		}
+		interfaces = interfaces.substring(0,Math.max(interfaces.length() - 2, 0));
+
 		os.println("\\begin{texdocclass}{" + type + "}{"
-				+ HTMLToTex.convert(cd.name()) + "}");
+				+ HTMLToTex.convert(cd.name()) + "}{"
+				+ HTMLToTex.convert(superclassName) + "}{"
+				+ HTMLToTex.convert(interfaces) + "}");
 
 		os.println("\\label{texdoclet:" + cd.containingPackage().name() + "." + cd.name() + "}");
 		os.println("\\begin{texdocclassintro}");
