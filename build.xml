@@ -35,6 +35,8 @@
 			<arg value="bin"/>
 			<arg value="-doclet"/>
 			<arg value="org.wonderly.doclets.TexDoclet"/>
+			<arg value="-classpath"/>
+			<arg value="${toolsjar}"/>
 			<arg value="-sourcepath"/>
 			<arg value="src"/>
 			<arg value="-encoding"/>
