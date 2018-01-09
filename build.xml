@@ -2,7 +2,7 @@
 
 	<target name="init">
 		<!-- this is highly system specific unfortunately... -->
-		<property name="toolsjar"   value="/usr/lib/jvm/java-6-sun/lib/tools.jar"/>
+		<property name="toolsjar"   value="/usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar"/>
 
 		<property name="srcdir"     value="./src"/>
 		<property name="builddir"   value="./bin"/>
